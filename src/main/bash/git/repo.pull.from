@@ -17,11 +17,11 @@ fi
 # TODO Only do this for repositories where merge based publishing is allowed.
 if [ 'true' == $(repo.is.instance.of.git) ]; then
 	if [ 'true' == $(repo.is.instance.of.git.bare) ]; then
-		git fetch $address
+		git fetch $address $(git rev-parse --abbrev-ref HEAD)
 	else
 		# TODO Update or check all branches.
 		git submodule update --recursive --remote
-		git pull $address
+		git pull $address $(git rev-parse --abbrev-ref HEAD)
 	fi
 else
 	exit 1
